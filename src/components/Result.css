@@ -50,3 +50,14 @@
 .result-card button:hover {
   background: #388e3c;
 }
+.result-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #11998e, #38ef7d);
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
