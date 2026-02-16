@@ -1,6 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaMicrophone, FaMicrophoneSlash, FaVideo, FaVideoSlash } from "react-icons/fa";
+import {
+  FaMicrophone,
+  FaMicrophoneSlash,
+  FaVideo,
+  FaVideoSlash,
+} from "react-icons/fa";
+
+import "./Interview.css";
 
 const Interview = () => {
   const videoRef = useRef(null);
@@ -10,7 +17,7 @@ const Interview = () => {
   const [cameraOn, setCameraOn] = useState(false);
   const [micOn, setMicOn] = useState(false);
 
-  // Start camera & mic
+  // Start Camera & Mic
   const startMedia = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -46,9 +53,9 @@ const Interview = () => {
     }
   };
 
-  // Stop all media
+  // Stop Media
   const stopMedia = () => {
-    streamRef.current?.getTracks().forEach(track => track.stop());
+    streamRef.current?.getTracks().forEach((track) => track.stop());
     setCameraOn(false);
     setMicOn(false);
   };
@@ -65,34 +72,30 @@ const Interview = () => {
   }, []);
 
   return (
-    <div style={styles.page}>
-      <h1 style={styles.heading}>AI Interview Session</h1>
-      <p style={styles.subtext}>
-        WebRTC based camera & microphone monitoring
-      </p>
-
-      <div style={styles.videoBox}>
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          playsInline
-          style={styles.video}
-        />
+    <div className="interview-container">
+      <div className="header glass">
+        <h1 className="title">AI Interview Session</h1>
+        <p className="subtitle">
+          WebRTC based camera & microphone monitoring
+        </p>
       </div>
 
-      <div style={styles.controls}>
-        <button style={styles.btn} onClick={toggleCamera}>
-          {cameraOn ? <FaVideo /> : <FaVideoSlash />} &nbsp;
+      <div className="video-card glass">
+        <video ref={videoRef} autoPlay muted playsInline className="video" />
+      </div>
+
+      <div className="controls">
+        <button className="btn blue" onClick={toggleCamera}>
+          {cameraOn ? <FaVideo /> : <FaVideoSlash />}
           {cameraOn ? "Camera ON" : "Camera OFF"}
         </button>
 
-        <button style={styles.btn} onClick={toggleMic}>
-          {micOn ? <FaMicrophone /> : <FaMicrophoneSlash />} &nbsp;
+        <button className="btn blue" onClick={toggleMic}>
+          {micOn ? <FaMicrophone /> : <FaMicrophoneSlash />}
           {micOn ? "Mic ON" : "Mic OFF"}
         </button>
 
-        <button style={{ ...styles.btn, background: "#ff4d4d" }} onClick={endInterview}>
+        <button className="btn red" onClick={endInterview}>
           End Interview
         </button>
       </div>
@@ -101,56 +104,3 @@ const Interview = () => {
 };
 
 export default Interview;
-
-/* ---------------- STYLES ---------------- */
-
-const styles = {
-  page: {
-    minHeight: "100vh",
-    background: "#6f7bd9",
-    textAlign: "center",
-    padding: "30px",
-  },
-  heading: {
-    color: "#ffffff",
-    fontSize: "34px",
-    fontWeight: "700",
-    marginBottom: "6px",
-  },
-  subtext: {
-    color: "#eaeaea",
-    fontSize: "16px",
-    marginBottom: "25px",
-  },
-  videoBox: {
-    maxWidth: "900px",
-    margin: "0 auto",
-    background: "#000",
-    borderRadius: "16px",
-    padding: "10px",
-    boxShadow: "0 10px 25px rgba(0,0,0,0.3)",
-  },
-  video: {
-    width: "100%",
-    borderRadius: "12px",
-  },
-  controls: {
-    marginTop: "25px",
-    display: "flex",
-    justifyContent: "center",
-    gap: "15px",
-    flexWrap: "wrap",
-  },
-  btn: {
-    padding: "12px 18px",
-    fontSize: "15px",
-    border: "none",
-    borderRadius: "8px",
-    background: "#2563eb",
-    color: "#fff",
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    gap: "6px",
-  },
-};
