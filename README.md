@@ -1,7 +1,4 @@
-Perfect Valar — here is your **final polished README** (correct role, correct project description, clean and professional).
-You can **directly copy → paste into GitHub README.md**.
 
----
 
 # 🤖 AI Interview & Assessment System (Frontend)
 
